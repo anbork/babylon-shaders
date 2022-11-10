@@ -1,4 +1,4 @@
-import { Scene, SceneLoader, ActionManager, ExecuteCodeAction, Vector3 } from "@babylonjs/core"
+import { Scene, SceneLoader, ActionManager, ExecuteCodeAction, Vector3, Quaternion, AbstractMesh } from "@babylonjs/core"
 
 export const LoadPlatforms = async (scene: Scene): Promise<void> => {
   let activePlatform: number = 1;
@@ -15,12 +15,12 @@ export const LoadPlatforms = async (scene: Scene): Promise<void> => {
     scene
   );
   
-  const lookatObjects: string[] = ["Lemon1", "Lemon2", "Lemon3", "Plus_1", "Plus_2", "Plus_3"];
+  const lookatObjects: string[] = ["Plus_1", "Plus_2", "Plus_3"];
 
-  lookatObjects.forEach(name => {
+  lookatObjects.forEach((name, index) => {
     const object = scene.getMeshByName(name);
     if (!object) return;
-    object.lookAt(new Vector3(0,0,-1000), 1)
+    object.rotate(new Vector3(0,1,0), Math.PI/3*index)
   });
 
   const objects: string[] = ["Plus_Back", "Plus_Cap", "Plus_Cloth", "Plus_Face", "Plus_Back_Stroke", "Plus_Cap_Stroke", "Plus_Cloth_Stroke", "Plus_Face_Stroke", "Line_Back_1", "Line_Back_2", "Line_Cap_1", "Line_Cap_2", "Line_Cloth_1", "Line_Cloth_2", "Line_Face_1", "Line_Face_2", "Point_Back", "Point_Cap", "Point_Cloth", "Point_Face", "Background_Sphere"];
@@ -50,12 +50,20 @@ export const LoadPlatforms = async (scene: Scene): Promise<void> => {
     }));
     
     collider.actionManager.registerAction(new ExecuteCodeAction(ActionManager.OnPickTrigger, function(){
+      let rotationAngle = 0;
       if (activePlatform == direction[index].forward) {
         scene.getAnimationGroupByName('Forward' + direction[index].forward)?.start(false)
+        rotationAngle = -Math.PI/3;
       } else
       if (activePlatform == direction[index].backward) {
         scene.getAnimationGroupByName('Backward' + direction[index].backward)?.start(false)
+        rotationAngle = Math.PI/3;
       }
+      lookatObjects.forEach((name) => {
+        const object = scene.getMeshByName(name);
+        if (!object) return;
+        object.rotate(new Vector3(0,1,0), rotationAngle)
+      });
       activePlatform = index + 1
     }));
     
