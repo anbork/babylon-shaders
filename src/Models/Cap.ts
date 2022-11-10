@@ -1,4 +1,4 @@
-import { SceneLoader, Vector3 } from "@babylonjs/core"
+import { SceneLoader, Vector3, VertexBuffer } from "@babylonjs/core"
 import { shader } from "./Shader"
 
 export const LoadCap = async (): Promise<void> => {
@@ -12,9 +12,13 @@ export const LoadCap = async (): Promise<void> => {
   const shaderMaterial = shader();
 
   shaderMaterial.needDepthPrePass = true;
-  cap.position = new Vector3(0, 0, 0);
+  cap.position = new Vector3(0, 150, 0);
   cap.material = shaderMaterial;
 
-  
+
+  let positions = cap.getVerticesData(VertexBuffer.PositionKind)!
+  positions = positions.map(uv => uv*100)
+  cap.setVerticesData(VertexBuffer.PositionKind, positions, false)
+
   console.log("models", models);
 }

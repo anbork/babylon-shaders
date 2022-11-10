@@ -1,6 +1,11 @@
 import * as BABYLON from '@babylonjs/core';
-import "@babylonjs/loaders";
+import { GLTFFileLoader, GLTFLoaderAnimationStartMode } from "@babylonjs/loaders";
 import { LoadCap } from './Models/Cap'
+import { LoadPlatforms } from './Models/Platforms'
+
+BABYLON.SceneLoader.OnPluginActivatedObservable.add(function (loader) {
+  (loader as GLTFFileLoader).animationStartMode = GLTFLoaderAnimationStartMode.NONE;
+});
 
 const canvas: any = document.getElementById("renderCanvas"); // Get the canvas element
 const engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
@@ -8,19 +13,26 @@ const engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engi
 // Add your code here matching the playground format
 const createScene = function () {
   const scene = new BABYLON.Scene(engine);
+  
   const camera = new BABYLON.ArcRotateCamera(
     "camera",
-    Math.PI / 2,
-    Math.PI / 3.2,
-    4,
-    BABYLON.Vector3.Zero(),
+    -Math.PI / 2,
+    Math.PI / 2.2,
+    1000,
+    new BABYLON.Vector3(0,0,0),
     scene
   )
+  camera.inputs.clear();
+  camera.inputs.add(new BABYLON.ArcRotateCameraMouseWheelInput());
+  camera.wheelPrecision = 0.5;
+  camera.lowerRadiusLimit = 500;
 
+  
   camera.attachControl(canvas, true);
   new BABYLON.HemisphericLight("light", new BABYLON.Vector3(1, 1, 0), scene);
 
-  LoadCap()
+  LoadCap();
+  LoadPlatforms(scene);
 
   return scene;
 };
@@ -28,7 +40,6 @@ const createScene = function () {
 const scene = createScene(); //Call the createScene function
 
 engine.runRenderLoop(function () {
-  
   scene.render();
 });
 
