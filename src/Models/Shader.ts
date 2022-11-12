@@ -1,7 +1,7 @@
 import * as BABYLON from '@babylonjs/core';
 
 export const shader = (): BABYLON.NodeMaterial => {
-  var nodeMaterial = new BABYLON.NodeMaterial("node");
+  var nodeMaterial = new BABYLON.NodeMaterial("MAT_Platform_Emissive_Stroke");
 
   // InputBlock
   var position = new BABYLON.InputBlock("position");

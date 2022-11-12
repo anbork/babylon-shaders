@@ -1,0 +1,122 @@
+[
+  {
+    "token_id": "162",
+    "owner_id": "topoliniypuh.testnet",
+    "title": null,
+    "description": null,
+    "media": "QmYeGkgXMeArhXTyw6Zc2JmLsyFqgp436SUsWAHeaJQAw9",
+    "media_hash": null,
+    "copies": null,
+    "issued_at": null,
+    "expires_at": null,
+    "model": {
+      "kind": "lemon",
+      "exo": "Exo_Snowwhite_Exoskeleton_AA02",
+      "eyes": "Eyes_Green_AA02",
+      "head": "Head_Fresh_Lemon_AA01",
+      "face": "Face_Ninja_Balaclava_NA_01",
+      "teeth": "Teeth_Oldstyle_AA04",
+      "fire_arm": {
+        "token_id": "157",
+        "flavour": "FireArms_Assault_Rifle_AA02"
+      },
+      "cold_arm": {
+        "token_id": "158",
+        "flavour": "ColdArms_Grappling_Hook_PA01"
+      },
+      "cloth": {
+        "token_id": "159",
+        "flavour": "Cloth_Bandolier_MA02"
+      },
+      "cap": {
+        "token_id": "161",
+        "flavour": "Cap_Cowboy_Hat_CA01"
+      },
+      "back": {
+        "token_id": "160",
+        "flavour": "Back_Bomb_Barrel_PA02"
+      },
+      "sets": []
+    }
+  },
+  {
+    "token_id": "270",
+    "owner_id": "topoliniypuh.testnet",
+    "title": null,
+    "description": null,
+    "media": "QmYeGkgXMeArhXTyw6Zc2JmLsyFqgp436SUsWAHeaJQAw9",
+    "media_hash": null,
+    "copies": null,
+    "issued_at": null,
+    "expires_at": null,
+    "model": {
+      "kind": "lemon",
+      "exo": "Exo_Steel_Exoskeleton_AA01",
+      "eyes": "Eyes_Blue_AA01",
+      "head": "Head_Zombie_ZA01",
+      "face": "Face_Gas_Mask_MA01",
+      "teeth": "Teeth_Sharp_AA03",
+      "fire_arm": {
+        "token_id": "265",
+        "flavour": "FireArms_Revolver_CA01"
+      },
+      "cold_arm": {
+        "token_id": "266",
+        "flavour": "ColdArms_Katana_NA01"
+      },
+      "cloth": {
+        "token_id": "267",
+        "flavour": "Cloth_Chain_Gold_RA01"
+      },
+      "cap": {
+        "token_id": "269",
+        "flavour": "Cap_Pirate_Bandana_PA02"
+      },
+      "back": {
+        "token_id": "268",
+        "flavour": "Back_Adventurer_Backpack_PA01"
+      },
+      "sets": []
+    }
+  },
+  {
+    "token_id": "294",
+    "owner_id": "topoliniypuh.testnet",
+    "title": null,
+    "description": null,
+    "media": "QmYeGkgXMeArhXTyw6Zc2JmLsyFqgp436SUsWAHeaJQAw9",
+    "media_hash": null,
+    "copies": null,
+    "issued_at": null,
+    "expires_at": null,
+    "model": {
+      "kind": "lemon",
+      "exo": "Exo_Steel_Exoskeleton_AA01",
+      "eyes": "Eyes_Blue_AA01",
+      "head": "Head_Fresh_Lemon_AA01",
+      "face": "Face_Ninja_Balaclava_NA_01",
+      "teeth": "Teeth_Hollywood_AA01",
+      "fire_arm": {
+        "token_id": "289",
+        "flavour": "FireArms_Revolver_CA01"
+      },
+      "cold_arm": {
+        "token_id": "290",
+        "flavour": "ColdArms_Katana_NA01"
+      },
+      "cloth": {
+        "token_id": "291",
+        "flavour": "Cloth_Chain_Gold_RA01"
+      },
+      "cap": {
+        "token_id": "293",
+        "flavour": "Cap_Pirate_Bandana_PA02"
+      },
+      "back": {
+        "token_id": "292",
+        "flavour": "Back_Adventurer_Backpack_PA01"
+      },
+      "sets": []
+    }
+  }
+]

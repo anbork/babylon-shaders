@@ -2,6 +2,7 @@ import * as BABYLON from '@babylonjs/core';
 import { GLTFFileLoader, GLTFLoaderAnimationStartMode } from "@babylonjs/loaders";
 import { LoadCap } from './Models/Cap'
 import { LoadPlatforms } from './Models/Platforms'
+import { Lemon } from './Models/Lemon'
 
 BABYLON.SceneLoader.OnPluginActivatedObservable.add(function (loader) {
   (loader as GLTFFileLoader).animationStartMode = GLTFLoaderAnimationStartMode.NONE;
@@ -31,8 +32,9 @@ const createScene = function () {
   camera.attachControl(canvas, true);
   new BABYLON.HemisphericLight("light", new BABYLON.Vector3(1, 1, 0), scene);
 
-  LoadCap();
+  //LoadCap();
   LoadPlatforms(scene);
+  Lemon(scene)
 
   return scene;
 };
