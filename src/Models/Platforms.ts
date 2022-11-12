@@ -52,17 +52,27 @@ export const LoadPlatforms = async (scene: Scene): Promise<void> => {
     collider.actionManager.registerAction(new ExecuteCodeAction(ActionManager.OnPickTrigger, function(){
       let rotationAngle = 0;
       if (activePlatform == direction[index].forward) {
-        scene.getAnimationGroupByName('Forward' + direction[index].forward)?.start(false)
+        scene.getAnimationGroupByName('Forward' + direction[index].forward)?.start(false, 0.5)
         rotationAngle = -Math.PI/3;
       } else
       if (activePlatform == direction[index].backward) {
-        scene.getAnimationGroupByName('Backward' + direction[index].backward)?.start(false)
+        scene.getAnimationGroupByName('Backward' + direction[index].backward)?.start(false, 0.5)
         rotationAngle = Math.PI/3;
       }
+
       lookatObjects.forEach((name) => {
-        const object = scene.getMeshByName(name);
-        if (!object) return;
-        object.rotate(new Vector3(0,1,0), rotationAngle)
+        const object = scene.getMeshByName(name)!;
+        const id = setInterval(frame, 10);
+        let time = 0
+        function frame() {
+          time += 10
+          if (time > 200) {
+            clearInterval(id);
+          } else {
+            console.log(time)
+            object.rotate(new Vector3(0,1,0), rotationAngle/20)
+          }
+        }
       });
       activePlatform = index + 1
     }));
