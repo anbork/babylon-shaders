@@ -1,4 +1,4 @@
-import { Scene, SceneLoader, ActionManager, ExecuteCodeAction, Vector3, TransformNode, Quaternion, AbstractMesh } from "@babylonjs/core"
+import { Scene, SceneLoader, ActionManager, ExecuteCodeAction, Vector3, TransformNode } from "@babylonjs/core"
 
 export const LoadPlatforms = async (scene: Scene): Promise<void> => {
   let activePlatform: number = 1;
@@ -7,7 +7,6 @@ export const LoadPlatforms = async (scene: Scene): Promise<void> => {
     {forward: 1, backward: 3},
     {forward: 2, backward: 1}
   ];
-  const camera = scene.getCameraByName('camera')!;
   const models = await SceneLoader.ImportMeshAsync(
     "",
     "/assets/glb-models/",
@@ -15,12 +14,15 @@ export const LoadPlatforms = async (scene: Scene): Promise<void> => {
     scene
   );
 
+  const platforms = models.meshes[0]
+  platforms.position.y = -100
+
   const lookatObjects: string[] = ["LemonPos_1", "LemonPos_2", "LemonPos_3"];
 
   lookatObjects.forEach((name, index) => {
     const object = scene.getNodeByName(name) as TransformNode
     if (!object) return;
-    object.rotate(new Vector3(0,1,0), Math.PI/3*index )
+    object.rotate(new Vector3(0,1,0), (Math.PI + Math.PI/3)*index )
   });
 
   const objects: string[] = ["Plus_Back", "Plus_Cap", "Plus_Cloth", "Plus_Face", "Plus_Back_Stroke", "Plus_Cap_Stroke", "Plus_Cloth_Stroke", "Plus_Face_Stroke", "Line_Back_1", "Line_Back_2", "Line_Cap_1", "Line_Cap_2", "Line_Cloth_1", "Line_Cloth_2", "Line_Face_1", "Line_Face_2", "Point_Back", "Point_Cap", "Point_Cloth", "Point_Face", "Background_Sphere"];

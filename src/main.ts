@@ -1,6 +1,5 @@
 import * as BABYLON from '@babylonjs/core';
 import { GLTFFileLoader, GLTFLoaderAnimationStartMode } from "@babylonjs/loaders";
-import { LoadCap } from './Models/Cap'
 import { LoadPlatforms } from './Models/Platforms'
 import { Lemon } from './Models/Lemon'
 
@@ -18,21 +17,21 @@ const createScene = function () {
   const camera = new BABYLON.ArcRotateCamera(
     "camera",
     -Math.PI / 2,
-    Math.PI / 2.2,
-    1000,
+    Math.PI / 2.1,
+    800,
     new BABYLON.Vector3(0,0,0),
     scene
   )
   camera.inputs.clear();
   camera.inputs.add(new BABYLON.ArcRotateCameraMouseWheelInput());
   camera.wheelPrecision = 0.5;
-  camera.lowerRadiusLimit = 500;
+  camera.lowerRadiusLimit = 300;
+  camera.upperRadiusLimit = 1000;
 
   
   camera.attachControl(canvas, true);
   new BABYLON.HemisphericLight("light", new BABYLON.Vector3(1, 1, 0), scene);
 
-  //LoadCap();
   LoadPlatforms(scene);
   Lemon(scene)
 

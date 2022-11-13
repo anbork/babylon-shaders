@@ -16,14 +16,6 @@
       "head": "Head_Fresh_Lemon_AA01",
       "face": "Face_Ninja_Balaclava_NA_01",
       "teeth": "Teeth_Oldstyle_AA04",
-      "fire_arm": {
-        "token_id": "157",
-        "flavour": "FireArms_Assault_Rifle_AA02"
-      },
-      "cold_arm": {
-        "token_id": "158",
-        "flavour": "ColdArms_Grappling_Hook_PA01"
-      },
       "cloth": {
         "token_id": "159",
         "flavour": "Cloth_Bandolier_MA02"
@@ -56,14 +48,6 @@
       "head": "Head_Zombie_ZA01",
       "face": "Face_Gas_Mask_MA01",
       "teeth": "Teeth_Sharp_AA03",
-      "fire_arm": {
-        "token_id": "265",
-        "flavour": "FireArms_Revolver_CA01"
-      },
-      "cold_arm": {
-        "token_id": "266",
-        "flavour": "ColdArms_Katana_NA01"
-      },
       "cloth": {
         "token_id": "267",
         "flavour": "Cloth_Chain_Gold_RA01"
@@ -96,14 +80,7 @@
       "head": "Head_Fresh_Lemon_AA01",
       "face": "Face_Ninja_Balaclava_NA_01",
       "teeth": "Teeth_Hollywood_AA01",
-      "fire_arm": {
-        "token_id": "289",
-        "flavour": "FireArms_Revolver_CA01"
-      },
-      "cold_arm": {
-        "token_id": "290",
-        "flavour": "ColdArms_Katana_NA01"
-      },
+
       "cloth": {
         "token_id": "291",
         "flavour": "Cloth_Chain_Gold_RA01"
