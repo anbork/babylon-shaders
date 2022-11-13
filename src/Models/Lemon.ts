@@ -1,18 +1,20 @@
 import { Scene, SceneLoader, Mesh, TransformNode } from "@babylonjs/core"
+import { shader } from './Shader'
 import data from "./data.json"
 
 export const Lemon = async (scene: Scene): Promise<void> => {
-  const models = await SceneLoader.LoadAssetContainerAsync(
+  const container = await SceneLoader.LoadAssetContainerAsync(
     "/assets/glb-models/",
     "BTLMN_Outfits_Tier_MP_20.glb",
     scene
   );
 
-  const LemonForCopy = {
-    root: models.meshes[0],
-    skeleton: models.skeletons[0],
-    animationGroups: models.animationGroups
-  }
+  // container.materials.forEach((material, index) => {
+  //   console.log(material.name)
+  //   if (material.name == "MAT_Outfit_Glossy" || material.name == "MAT_Outfit_AA") {
+  //     material.bind
+  //   }
+  // })
 
   const outfits: string[][] = data.map(({ model }) => {
     return Object.values(model).map((value: any) => {
@@ -21,23 +23,24 @@ export const Lemon = async (scene: Scene): Promise<void> => {
     })
   })
 
-  outfits.forEach((_list, index) => {
+  outfits.forEach((list, index) => {
     [`Plus_${index+1}`, `Plus_${index+1}_Stroke`].forEach(plus => {
       const mesh = scene.getMeshByName(plus)!
       mesh.visibility = 0
     })
 
     const nodePosition = scene.getNodeByName(`LemonPos_${index + 1}`) as TransformNode
-    let newLemon = LemonForCopy.root.clone(`Lemon_${index + 1}`, nodePosition) as Mesh;
-    let newLemonSkeleton = LemonForCopy.skeleton.clone(`Skeleton_${index + 1}`);
+    let newContainer = container.instantiateModelsToScene((name) => name.split('_primitive')[0], false, { doNotInstantiate: true })
+    let newLemon = newContainer.rootNodes[0];
+    newLemon.parent = nodePosition;
+    newLemon.rotation = nodePosition.rotation;
+    newContainer.animationGroups[0].start(true, 1.5);
     newLemon.getChildMeshes(false, (mesh) => mesh.getClassName() === "Mesh" && (mesh as Mesh).getTotalVertices() > 0).forEach((mesh) => {
-      console.log(mesh.name)
-      //const name = mesh.name.split('.')[1];
-      //if (!list.includes(name)) mesh.visibility = 0;
-      newLemon.rotation = nodePosition.rotation
-      mesh.skeleton = newLemonSkeleton;
+      // if (!list.includes(mesh.name)) {
+      //   mesh.visibility = 0;
+      // }
     });
   })
 
-  models.animationGroups[0].start(true, 1.5);
+  container
 }
