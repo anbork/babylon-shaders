@@ -2,7 +2,6 @@ import * as BABYLON from '@babylonjs/core';
 import { GLTFFileLoader, GLTFLoaderAnimationStartMode } from "@babylonjs/loaders";
 import { LoadPlatforms } from './Models/Platforms'
 import { Lemon } from './Models/Lemon'
-import { LoadBackpack } from './Models/Backpack'
 
 BABYLON.SceneLoader.OnPluginActivatedObservable.add(function (loader) {
   (loader as GLTFFileLoader).animationStartMode = GLTFLoaderAnimationStartMode.NONE;
