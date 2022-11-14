@@ -97,9 +97,11 @@ export const LoadPlatforms = async (scene: Scene): Promise<void> => {
       return;
     }
     const activeLemon = scene.getNodeByName(`LemonPos_${activePlatform}`) as TransformNode
+    const activePlace = scene.getNodeByName(`Platform_${activePlatform}`) as TransformNode
     const dx = evt.clientX - currentPosition.x;
     const angleY = dx * 0.01;
     activeLemon.rotation.y += angleY;
+    activePlace.rotate(new Vector3(0,1,0), angleY);
     currentPosition.x = evt.clientX;
   });
   
