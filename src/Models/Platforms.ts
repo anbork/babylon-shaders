@@ -22,7 +22,7 @@ export const LoadPlatforms = async (scene: Scene): Promise<void> => {
   lookatObjects.forEach((name, index) => {
     const object = scene.getNodeByName(name) as TransformNode
     if (!object) return;
-    object.rotate(new Vector3(0,1,0), (Math.PI + Math.PI/3)*index )
+    object.rotate(new Vector3(0,1,0), (Math.PI + Math.PI/3)*index)
   });
 
   const objects: string[] = ["Plus_Back", "Plus_Cap", "Plus_Cloth", "Plus_Face", "Plus_Back_Stroke", "Plus_Cap_Stroke", "Plus_Cloth_Stroke", "Plus_Face_Stroke", "Line_Back_1", "Line_Back_2", "Line_Cap_1", "Line_Cap_2", "Line_Cloth_1", "Line_Cloth_2", "Line_Face_1", "Line_Face_2", "Point_Back", "Point_Cap", "Point_Cloth", "Point_Face", "Background_Sphere"];
@@ -64,6 +64,7 @@ export const LoadPlatforms = async (scene: Scene): Promise<void> => {
 
       lookatObjects.forEach((name) => {
         const node = scene.getNodeByName(name) as TransformNode;
+        node.rotation.y = 0;
         const id = setInterval(frame, 5);
         let time = 0
         function frame() {
@@ -79,4 +80,31 @@ export const LoadPlatforms = async (scene: Scene): Promise<void> => {
     }));
     
   });
+
+
+
+  const canvas: any = document.getElementById("renderCanvas");              
+  const currentPosition = { x: 0, y: 0 };
+  let clicked = false;
+
+  canvas.addEventListener("pointerdown", function (evt: MouseEvent) {
+    currentPosition.x = evt.clientX;
+    clicked = true;
+  });
+  
+  canvas.addEventListener("pointermove", function (evt: MouseEvent) {
+    if (!clicked) {
+      return;
+    }
+    const activeLemon = scene.getNodeByName(`LemonPos_${activePlatform}`) as TransformNode
+    const dx = evt.clientX - currentPosition.x;
+    const angleY = dx * 0.01;
+    activeLemon.rotation.y += angleY;
+    currentPosition.x = evt.clientX;
+  });
+  
+  canvas.addEventListener("pointerup", function () {
+    clicked = false;
+  });
+
 }

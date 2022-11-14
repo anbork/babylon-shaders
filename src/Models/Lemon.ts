@@ -41,6 +41,4 @@ export const Lemon = async (scene: Scene): Promise<void> => {
       // }
     });
   })
-
-  container
 }
