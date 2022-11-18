@@ -1,4 +1,4 @@
-import { Scene, SceneLoader, ActionManager, ExecuteCodeAction, Vector3, TransformNode } from "@babylonjs/core"
+import { Scene, SceneLoader, ActionManager, ExecuteCodeAction, Vector3, TransformNode, AnimationGroup, Animation } from "@babylonjs/core"
 
 export const LoadPlatforms = async (scene: Scene): Promise<void> => {
   let activePlatform: number = 1;
@@ -53,29 +53,26 @@ export const LoadPlatforms = async (scene: Scene): Promise<void> => {
     
     collider.actionManager.registerAction(new ExecuteCodeAction(ActionManager.OnPickTrigger, function(){
       let rotationAngle = 0;
+      let platformAnimation: AnimationGroup | null = null;
+
       if (activePlatform == direction[index].forward) {
-        scene.getAnimationGroupByName('Forward' + direction[index].forward)?.start(false, 1)
-        rotationAngle = 2*Math.PI/3;
+        platformAnimation = scene.getAnimationGroupByName('Forward' + direction[index].forward) as AnimationGroup
+        rotationAngle = 2*Math.PI/3
       } else
       if (activePlatform == direction[index].backward) {
-        scene.getAnimationGroupByName('Backward' + direction[index].backward)?.start(false, 1)
-        rotationAngle = -2*Math.PI/3;
+        platformAnimation = scene.getAnimationGroupByName('Backward' + direction[index].backward) as AnimationGroup
+        rotationAngle = -2*Math.PI/3
+      }
+
+      if (platformAnimation) {
+        platformAnimation.start(false, 1);
       }
 
       lookatObjects.forEach((name) => {
-        const node = scene.getNodeByName(name) as TransformNode;
-        node.rotation.y = 0;
-        const id = setInterval(frame, 5);
-        let time = 0
-        function frame() {
-          time += 5
-          if (time > 300) {
-            clearInterval(id);
-          } else {
-            node.rotate(new Vector3(0,1,0), rotationAngle/60)
-          }
-        }
-      });
+        const lemon = scene.getNodeByName(name) as TransformNode;
+        Animation.CreateAndStartAnimation(`Lemon_rotation`, lemon, "rotation.y", 60, 25, lemon.rotation.y, lemon.rotation.y + rotationAngle, 0)
+      })
+
       activePlatform = index + 1
     }));
     
@@ -100,7 +97,7 @@ export const LoadPlatforms = async (scene: Scene): Promise<void> => {
     const activePlace = scene.getNodeByName(`Platform_${activePlatform}`) as TransformNode
     const dx = evt.clientX - currentPosition.x;
     const angleY = dx * 0.01;
-    activeLemon.rotation.y += angleY;
+    activeLemon.rotate(new Vector3(0,1,0), angleY);
     activePlace.rotate(new Vector3(0,1,0), angleY);
     currentPosition.x = evt.clientX;
   });
@@ -110,3 +107,4 @@ export const LoadPlatforms = async (scene: Scene): Promise<void> => {
   });
 
 }
+

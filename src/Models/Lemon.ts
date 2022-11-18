@@ -1,6 +1,4 @@
 import { Scene, SceneLoader, Mesh, TransformNode } from "@babylonjs/core"
-import { fabric } from '../Shaders/Fabric'
-import { leather } from '../Shaders/Leather'
 import data from "./data.json"
 
 export const Lemon = async (scene: Scene): Promise<void> => {
@@ -36,16 +34,5 @@ export const Lemon = async (scene: Scene): Promise<void> => {
     newLemon.parent = nodePosition;
     newLemon.rotation = nodePosition.rotation;
     newContainer.animationGroups[0].start(true, 1.5);
-    newLemon.getChildMeshes(false, (mesh) => mesh.getClassName() === "Mesh" && (mesh as Mesh).getTotalVertices() > 0).forEach((mesh) => {
-      if (mesh.material!.name == 'MAT_Outfit_Fabric') {
-        mesh.material = leather()
-      }
-      if (mesh.material!.name == 'MAT_Outfit_Plastic') {
-        mesh.material = fabric()
-      }
-      // if (!_list.includes(mesh.name)) {
-      //   mesh.visibility = 0;
-      // }
-    });
   })
 }

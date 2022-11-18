@@ -1,6 +1,6 @@
 import * as BABYLON from '@babylonjs/core';
 
-export const fabric = (): BABYLON.NodeMaterial => {
+export const fabric = ({ NormalTrimTexture, NormalDetailTexture, MaskTrimTexture }: { NormalTrimTexture: string, NormalDetailTexture: string, MaskTrimTexture: string }): BABYLON.NodeMaterial => {
 
   var nodeMaterial = new BABYLON.NodeMaterial("fabric");
 
@@ -102,7 +102,7 @@ export const fabric = (): BABYLON.NodeMaterial => {
   NormalTrim.convertToGammaSpace = false;
   NormalTrim.convertToLinearSpace = false;
   NormalTrim.disableLevelMultiplication = false;
-  NormalTrim.texture = new BABYLON.Texture("", null, false, false, 3);
+  NormalTrim.texture = new BABYLON.Texture(NormalTrimTexture, null, false, false, 3);
   NormalTrim.texture.wrapU = 1;
   NormalTrim.texture.wrapV = 1;
   NormalTrim.texture.uAng = 0;
@@ -142,7 +142,7 @@ export const fabric = (): BABYLON.NodeMaterial => {
   NormalDetail.convertToGammaSpace = false;
   NormalDetail.convertToLinearSpace = false;
   NormalDetail.disableLevelMultiplication = false;
-  NormalDetail.texture = new BABYLON.Texture("", null, false, false, 3);
+  NormalDetail.texture = new BABYLON.Texture(NormalDetailTexture, null, false, false, 3);
   NormalDetail.texture.wrapU = 1;
   NormalDetail.texture.wrapV = 1;
   NormalDetail.texture.uAng = 0;
@@ -220,7 +220,7 @@ export const fabric = (): BABYLON.NodeMaterial => {
   MaskTrim.convertToGammaSpace = false;
   MaskTrim.convertToLinearSpace = true;
   MaskTrim.disableLevelMultiplication = false;
-  MaskTrim.texture = new BABYLON.Texture("", null, false, false, 3);
+  MaskTrim.texture = new BABYLON.Texture(MaskTrimTexture, null, false, false, 3);
   MaskTrim.texture.wrapU = 1;
   MaskTrim.texture.wrapV = 1;
   MaskTrim.texture.uAng = 0;
@@ -461,5 +461,6 @@ export const fabric = (): BABYLON.NodeMaterial => {
   nodeMaterial.addOutputNode(FragmentOutput);
   nodeMaterial.build();
 
+  nodeMaterial.needDepthPrePass = true;
   return nodeMaterial;
 }
