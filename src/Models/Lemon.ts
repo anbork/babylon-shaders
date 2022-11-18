@@ -1,4 +1,4 @@
-import { Scene, SceneLoader, Mesh, TransformNode } from "@babylonjs/core"
+import { Scene, SceneLoader, TransformNode } from "@babylonjs/core"
 import data from "./data.json"
 
 export const Lemon = async (scene: Scene): Promise<void> => {

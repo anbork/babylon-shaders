@@ -22,8 +22,11 @@ const createScene = function () {
     new BABYLON.Vector3(0,0,0),
     scene
   )
-  camera.inputs.clear();
-  camera.inputs.add(new BABYLON.ArcRotateCameraMouseWheelInput());
+
+  camera.lowerAlphaLimit = camera.alpha;
+  camera.upperAlphaLimit = camera.alpha;
+  camera.upperBetaLimit = camera.beta;
+  camera.lowerBetaLimit = camera.beta;
   camera.wheelPrecision = 0.5;
   camera.lowerRadiusLimit = 300;
   camera.upperRadiusLimit = 1000;
